@@ -1,14 +1,14 @@
 // * Paso 4 = indexRoute.
 import {Router} from 'express'
-const indexRoute = Router()
-
-import userRoute from './userRoute';
 import bookingRoute from './bookingRoute';
+import userRoute from './userRoute';
 
+
+const indexRoute = Router()
 
 
 
 indexRoute.use('/users', userRoute);
-indexRoute.use('/booking',bookingRoute);
+indexRoute.use('/bookings',bookingRoute);
 
 export default indexRoute;
