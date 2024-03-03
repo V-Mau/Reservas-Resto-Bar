@@ -10,27 +10,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userLogin = exports.userRegister = exports.getUserById = exports.getAllUsers = void 0;
+const userService_1 = require("../service/userService");
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Obtener el listado de todos los usuarios.');
+    try {
+        const users = yield (0, userService_1.getAllUsersService)();
+        res.status(200).json(users);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 exports.getAllUsers = getAllUsers;
 const getUserById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send(' Obtener el detalle de un usuario específico.');
+    const { id } = req.params;
+    try {
+        const lookingUser = yield (0, userService_1.getUserByIdService)(Number(id));
+        if (!lookingUser) {
+            res.status(404).json({ message: "Usuario incorrecto" });
+            return;
+        }
+        res.status(200).json(lookingUser);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 exports.getUserById = getUserById;
 const userRegister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send(`Registro de un nuevo usuario`);
+    try {
+        const { name, email, birthdate, nDni, username, password } = req.body;
+        const newUser = yield (0, userService_1.userRegisterService)({
+            name, email, birthdate, nDni, username, password
+        });
+        res.status(201).json(newUser);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
 exports.userRegister = userRegister;
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Login del usuario a la aplicación.');
+    yield (0, userService_1.userLoginService)(req, res);
 });
 exports.userLogin = userLogin;

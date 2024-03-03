@@ -10,27 +10,54 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelBooking = exports.scheduleBooking = exports.getBookingDetails = exports.getAllBooking = void 0;
+const bookingService_1 = require("../service/bookingService");
 const getAllBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Obtener todo el listado de los turnos de todos los usuarios.');
+    try {
+        const booking = yield (0, bookingService_1.getAllBookingService)();
+        res.status(200).json(booking);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 exports.getAllBooking = getAllBooking;
 const getBookingDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Obtener el detalle de un turno específico.');
+    const { id } = req.params;
+    try {
+        const lookingBooking = yield (0, bookingService_1.getBookingDetailsService)(Number(id));
+        if (!lookingBooking) {
+            res.status(400).json({ message: "Reserva no realizada" });
+            return;
+        }
+        res.status(200).json(lookingBooking);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
 exports.getBookingDetails = getBookingDetails;
 const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Agendar un nuevo turno');
+    try {
+        const { date, time, user_id, status, description } = req.body;
+        const newBooking = yield (0, bookingService_1.scheduleBookingService)({
+            date, time, user_id, status, description,
+            id: 0
+        });
+        res.status(200).json(newBooking);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 });
 exports.scheduleBooking = scheduleBooking;
 const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res
-        .status(200)
-        .send('Cambiar el estatus de una reserva a "cancelled"');
+    try {
+        const booking_id = Number(req.params.id);
+        const result = yield (0, bookingService_1.cancelBookingService)(booking_id);
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 });
 exports.cancelBooking = cancelBooking;
