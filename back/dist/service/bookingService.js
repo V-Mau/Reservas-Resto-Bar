@@ -10,43 +10,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelBookingService = exports.scheduleBookingService = exports.getBookingDetailsService = exports.getAllBookingService = void 0;
-const booking = [
-    { id: 1, date: '10-01-2022', time: '10:00', user_id: 1, status: 'active', description: 'Reserva guardada' },
-    { id: 2, date: '10-01-2022', time: '11:00', user_id: 1, status: 'active', description: 'Reserva guardada' },
-    { id: 3, date: '10-01-2022', time: '12:00', user_id: 1, status: 'cancelled', description: 'Reserva cancelada' },
-    { id: 4, date: '10-01-2022', time: '13:00', user_id: 1, status: 'active', description: 'booking description' },
-    { id: 5, date: '10-01-2022', time: '14:00', user_id: 1, status: 'cancelled', description: 'Reserva cancelada' },
-    { id: 6, date: '10-01-2022', time: '15:00', user_id: 1, status: 'active', description: 'Reserva guardada' }
-];
+const repository_1 = require("../config/repository");
 const getAllBookingService = () => __awaiter(void 0, void 0, void 0, function* () {
-    return booking;
+    const allBookings = yield repository_1.bookingModel.find({
+        relations: { user: true },
+    });
+    return allBookings;
 });
 exports.getAllBookingService = getAllBookingService;
 const getBookingDetailsService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const lookingBooking = booking.find(booking => booking.id === id);
-    if (!lookingBooking) {
-        return null;
-    }
+    const lookingBooking = yield repository_1.bookingModel.findOne({
+        where: { id },
+        relations: { user: true },
+    });
+    if (!lookingBooking)
+        throw Error('Reserva no encontrada');
     return lookingBooking;
 });
 exports.getBookingDetailsService = getBookingDetailsService;
-const scheduleBookingService = (createBooking) => __awaiter(void 0, void 0, void 0, function* () {
-    const newBooking = {
-        id: booking.length + 1,
-        date: createBooking.date,
-        time: createBooking.time,
-        user_id: createBooking.user_id,
-        status: 'active' || 'cancelled',
-        description: createBooking.description
-    };
-    booking.push(newBooking);
+const scheduleBookingService = (createBookingDto) => __awaiter(void 0, void 0, void 0, function* () {
+    const user_id = createBookingDto.user_id;
+    const bookingExists = yield repository_1.bookingModel.findOneBy({ user: { id: user_id } });
+    if (!bookingExists)
+        throw Error('Usuario no encontrado.');
+    const newBooking = repository_1.bookingModel.create(createBookingDto);
+    yield repository_1.bookingModel.save(newBooking);
     return newBooking;
 });
 exports.scheduleBookingService = scheduleBookingService;
 const cancelBookingService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const cancelBooking = booking.find(booking => booking.id === id);
+    const cancelBooking = yield repository_1.bookingModel.findOne({
+        where: { id },
+        relations: { user: true },
+    });
     if (cancelBooking) {
         cancelBooking.status = 'cancelled';
+        yield repository_1.bookingModel.save(cancelBooking);
         return cancelBooking;
     }
     else {

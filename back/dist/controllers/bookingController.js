@@ -13,8 +13,8 @@ exports.cancelBooking = exports.scheduleBooking = exports.getBookingDetails = ex
 const bookingService_1 = require("../service/bookingService");
 const getAllBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const booking = yield (0, bookingService_1.getAllBookingService)();
-        res.status(200).json(booking);
+        const bookings = yield (0, bookingService_1.getAllBookingService)();
+        res.status(200).json(bookings);
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -26,7 +26,7 @@ const getBookingDetails = (req, res) => __awaiter(void 0, void 0, void 0, functi
     try {
         const lookingBooking = yield (0, bookingService_1.getBookingDetailsService)(Number(id));
         if (!lookingBooking) {
-            res.status(400).json({ message: "Reserva no realizada" });
+            res.status(404).json({ message: "Reserva no realizada" });
             return;
         }
         res.status(200).json(lookingBooking);
@@ -41,7 +41,6 @@ const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function
         const { date, time, user_id, status, description } = req.body;
         const newBooking = yield (0, bookingService_1.scheduleBookingService)({
             date, time, user_id, status, description,
-            id: 0
         });
         res.status(200).json(newBooking);
     }

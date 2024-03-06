@@ -10,32 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateCredential = exports.credentialService = void 0;
-const credentials = [
-    { id: 1, username: 'pedro', password: '123' },
-    { id: 2, username: 'juan', password: '123' },
-    { id: 3, username: 'luis', password: '123' },
-    { id: 4, username: 'maria', password: '123' },
-    { id: 5, username: 'jose', password: '123' },
-    { id: 6, username: 'pepe', password: '123' },
-];
-let id_credential = 1;
+const repository_1 = require("../config/repository");
 const credentialService = (createCredentialDto) => __awaiter(void 0, void 0, void 0, function* () {
-    const newCredential = {
-        id: id_credential++,
-        username: createCredentialDto.username,
-        password: createCredentialDto.password
-    };
-    credentials.push(newCredential);
+    const newCredential = repository_1.credentialModel.create(createCredentialDto);
+    yield repository_1.credentialModel.save(newCredential);
     return newCredential;
 });
 exports.credentialService = credentialService;
 const validateCredential = (validateCredentialDto) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = validateCredentialDto;
-    const lookingCredential = credentials.find(credential => credential.username === username);
-    if (!lookingCredential)
+    const credential = yield repository_1.credentialModel.findOneBy({ username });
+    if (!credential)
         throw Error('Usuario no encontrado.');
-    if (lookingCredential.password !== password)
+    if (credential.password !== password)
         throw Error('Contraseña incorrecta.');
-    return lookingCredential;
+    return credential;
 });
 exports.validateCredential = validateCredential;
