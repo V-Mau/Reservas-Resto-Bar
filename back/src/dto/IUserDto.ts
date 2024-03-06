@@ -1,4 +1,5 @@
-export interface IUserDto {
+
+export interface createUserDto {
     name: string;
     email: string;
     birthdate: string;
@@ -6,3 +7,4 @@ export interface IUserDto {
     username: string;
     password: string;
 }
+

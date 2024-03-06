@@ -1,58 +1,52 @@
-import { cancelBooking, getAllBooking, getBookingDetails } from "../controllers/bookingController";
-import { IBooking } from "../interface/IBooking";
-import { IBookingDto } from "../dto/IBookingDto";
+// bookingService.ts
 
+import { createBookingDto } from "../Dto/IBookingDto";
+import { bookingModel, usersModel } from "../config/repository";
+import Booking from "../entities/Booking";
+import Credential from "../entities/Credential";
+import { credentialService } from "./credentialService";
 
-const booking: IBooking[] = [
-    { id: 1, date: '10-01-2022', time: '10:00', user_id: 1, status: 'active', description: 'Reserva guardada' },
-    { id: 2, date: '10-01-2022', time: '11:00', user_id: 1, status: 'active', description: 'Reserva guardada' },
-    { id: 3, date: '10-01-2022', time: '12:00', user_id: 1, status: 'cancelled', description: 'Reserva cancelada' },
-    { id: 4, date: '10-01-2022', time: '13:00', user_id: 1, status: 'active', description: 'booking description' },
-    { id: 5, date: '10-01-2022', time: '14:00', user_id: 1, status: 'cancelled', description: 'Reserva cancelada' },
-    { id: 6, date: '10-01-2022', time: '15:00', user_id: 1, status: 'active', description: 'Reserva guardada' }
-];
+export const getAllBookingService = async (): Promise<Booking[]> => {
+    const allBookings: Booking[] = await bookingModel.find({
+        relations: { user: true },
+    });
+    return allBookings;
+};
 
-
-export const getAllBookingService = async (): Promise<IBooking[]> => {
-    return booking;
-}
-
-// *Implementar una función que pueda retornar un elemento del arreglo que haya sido identificado por id.
-
-export const getBookingDetailsService = async (id: number): Promise<IBooking | null> => {
-    const lookingBooking = booking.find(booking => booking.id === id);
-    if (!lookingBooking) {
-        return null;
-    }
+export const getBookingDetailsService = async (id: number): Promise<Booking | null> => {
+    const lookingBooking: Booking | null = await bookingModel.findOne({
+        where: { id },
+        relations: { user: true },
+    });
+    if (!lookingBooking) throw Error('Reserva no encontrada');
     return lookingBooking;
-}
+};
 
-// *Implementar una función que pueda crear un nuevo turno, siempre guardando, además, el ID del usuario que ha creado dicho turno. NO PUEDE HABER UN TURNO SIN ID DE USUARIO. 
+export const scheduleBookingService = async (createBookingDto: createBookingDto): Promise<Booking> => {
+    const user_id: number = createBookingDto.user_id;
 
-export const scheduleBookingService = async (createBooking: IBooking): Promise<IBooking> => {
-    const newBooking: IBooking = {
-        id: booking.length + 1,
-        date: createBooking.date,
-        time:createBooking.time,
-        user_id: createBooking.user_id,
-        status: 'active' || 'cancelled',
-        description: createBooking.description
+    const bookingExists = await bookingModel.findOneBy({ user: { id: user_id } } );
+    if (!bookingExists) throw Error('Usuario no encontrado.');
 
+    const newBooking: Booking = bookingModel.create(createBookingDto);
 
-    };
-    booking.push(newBooking);
+    await bookingModel.save(newBooking);
+
     return newBooking;
-    
-}
+};
 
-// *Implementar una función que reciba el id de un turno específico y una vez identificado el turno correspondiente, cambiar su estado a “cancelled”.
 
-export const cancelBookingService = async (id: number): Promise<IBooking | undefined> => {
-    const cancelBooking: IBooking | undefined = booking.find(booking => booking.id === id);
+export const cancelBookingService = async (id: number): Promise<Booking | undefined> => {
+    const cancelBooking: Booking | null = await bookingModel.findOne({
+        where: { id },
+        relations: { user: true },
+    });
+
     if (cancelBooking) {
         cancelBooking.status = 'cancelled';
+        await bookingModel.save(cancelBooking);
         return cancelBooking;
-    } else{
+    } else {
         throw Error('Reserva no encontrada');
     }
-}
+};

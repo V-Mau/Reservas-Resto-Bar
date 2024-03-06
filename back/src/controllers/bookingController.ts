@@ -1,15 +1,16 @@
 // * Paso 8 = que paso 6 (bookingController)
 import { Request, Response } from "express";
-import { IBooking } from "../interface/IBooking";
 import { cancelBookingService, getAllBookingService, getBookingDetailsService, scheduleBookingService } from "../service/bookingService";
+import Booking from "../entities/Booking";
+
 
 
 
 export const getAllBooking = async (req:Request,res:Response) => {
     
     try {
-        const booking : IBooking[] = await getAllBookingService();
-        res.status(200).json(booking); 
+        const bookings : Booking[] = await getAllBookingService();
+        res.status(200).json(bookings); 
     }catch (error:any) {
         res.status(500).json({message: error.message});
     }
@@ -21,9 +22,9 @@ export const getAllBooking = async (req:Request,res:Response) => {
 export const getBookingDetails = async (req:Request,res:Response) => {
     const {id} = req.params;
     try {
-        const lookingBooking = await getBookingDetailsService(Number(id));
+        const lookingBooking: Booking | null = await getBookingDetailsService(Number(id));
         if (!lookingBooking) {
-            res.status(400).json({ message: "Reserva no realizada" });
+            res.status(404).json({ message: "Reserva no realizada" });
             return;
         }
         res.status(200).json(lookingBooking);
@@ -36,9 +37,9 @@ export const getBookingDetails = async (req:Request,res:Response) => {
 export const scheduleBooking = async (req: Request,res:Response) => {
     try {
         const { date, time, user_id, status, description} = req.body;
-        const newBooking : IBooking = await scheduleBookingService({
+        const newBooking : Booking = await scheduleBookingService({
             date, time, user_id, status, description,
-            id: 0
+            
         });
 
             res.status(200).json(newBooking);

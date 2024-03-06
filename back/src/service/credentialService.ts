@@ -1,42 +1,22 @@
 // * paso 10-1 = CredentialService.
 
-import { ICredentialDto } from "../dto/ICredentialDto";
-import { ICredential } from "../interface/ICredential";
+import { credentialModel } from "../config/repository";
+import { createCredentialDto } from "../Dto/ICredentialDto";
+import Credential from "../entities/Credential";
 
 
-
-
-const credentials: ICredential[] = [
-    { id: 1, username: 'pedro', password: '123'},
-    { id: 2, username: 'juan', password: '123'},
-    { id: 3, username: 'luis', password: '123'},
-    { id: 4, username: 'maria', password: '123'},
-    { id: 5, username: 'jose', password: '123'},
-    { id: 6, username: 'pepe', password: '123'},
-]; 
-let id_credential: number = 1;
-
-export const credentialService = async (createCredentialDto: ICredentialDto): Promise <ICredential> => {
-    const newCredential: ICredential = {
-        id: id_credential++,
-        username: createCredentialDto.username,
-        password: createCredentialDto.password
-    };
-    credentials.push(newCredential);
+export const credentialService = async (createCredentialDto: createCredentialDto): Promise <Credential> => {
+    const newCredential: Credential = credentialModel.create(createCredentialDto);
+    await credentialModel.save(newCredential);
     return newCredential;
 };
 
-export const validateCredential = async (validateCredentialDto: ICredentialDto): Promise<ICredential> => {
+export const validateCredential = async (validateCredentialDto: createCredentialDto): Promise<Credential> => {
+
     const { username, password } = validateCredentialDto;
+    const credential: Credential | null = await credentialModel.findOneBy({username});
 
-    const lookingCredential = credentials.find(credential => credential.username === username);
-
-    if (!lookingCredential) throw Error ('Usuario no encontrado.');
-
-    if (lookingCredential.password !== password) throw Error ('Contraseña incorrecta.');
-    
-    return lookingCredential
-    
-
-   
+    if (!credential) throw Error ('Usuario no encontrado.');
+    if (credential.password !== password) throw Error ('Contraseña incorrecta.');
+    return credential
 };
