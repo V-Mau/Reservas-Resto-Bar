@@ -3,50 +3,54 @@
 import { createBookingDto } from "../Dto/IBookingDto";
 import { bookingModel, usersModel } from "../config/repository";
 import Booking from "../entities/Booking";
-import Credential from "../entities/Credential";
-import { credentialService } from "./credentialService";
+import User from "../entities/User";
+
 
 export const getAllBookingService = async (): Promise<Booking[]> => {
-    const allBookings: Booking[] = await bookingModel.find({
-        relations: { user: true },
-    });
+    const allBookings: Booking[] = await bookingModel.find();
     return allBookings;
 };
 
-export const getBookingDetailsService = async (id: number): Promise<Booking | null> => {
-    const lookingBooking: Booking | null = await bookingModel.findOne({
-        where: { id },
-        relations: { user: true },
+export const getBookingByIdService = async (appId: number): Promise<Booking | null> => {
+    const lookingBooking: Booking | null = await bookingModel.findOneBy({
+        id: appId
+        
     });
     if (!lookingBooking) throw Error('Reserva no encontrada');
     return lookingBooking;
 };
 
 export const scheduleBookingService = async (createBookingDto: createBookingDto): Promise<Booking> => {
-    const user_id: number = createBookingDto.user_id;
-
-    const bookingExists = await bookingModel.findOneBy({ user: { id: user_id } } );
-    if (!bookingExists) throw Error('Usuario no encontrado.');
 
     const newBooking: Booking = bookingModel.create(createBookingDto);
-
     await bookingModel.save(newBooking);
+   const user: User | null = await usersModel.findOneBy({
+        id: createBookingDto.user_id
 
-    return newBooking;
+        
+   });
+   if(!user) throw Error('Usuario no encontrado');
+   newBooking.user = user;
+
+   await bookingModel.save(newBooking);
+   return newBooking;
 };
 
 
-export const cancelBookingService = async (id: number): Promise<Booking | undefined> => {
-    const cancelBooking: Booking | null = await bookingModel.findOne({
-        where: { id },
-        relations: { user: true },
+
+
+    
+
+
+
+
+
+export const cancelBookingService = async (appId: number): Promise<void> => {
+    const cancelBooking: Booking | null = await bookingModel.findOneBy({
+        id: appId,
     });
+    if(!cancelBooking) throw Error('Reserva no encontrada');
+    cancelBooking.status = 'cancelled';
+    await bookingModel.save(cancelBooking);
+}
 
-    if (cancelBooking) {
-        cancelBooking.status = 'cancelled';
-        await bookingModel.save(cancelBooking);
-        return cancelBooking;
-    } else {
-        throw Error('Reserva no encontrada');
-    }
-};

@@ -1,6 +1,6 @@
 export interface createBookingDto {
-    date: Date;
-    time: Date;
+    date: string;
+    time: string;
     user_id: number;
     status: 'active' | 'cancelled';
     description: string;

@@ -7,10 +7,10 @@ class Booking {
     id: number;
 
     @Column()
-    date: Date;
+    date: string;
 
     @Column()
-    time: Date;
+    time: string;
 
     @Column()
     status: string;

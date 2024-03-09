@@ -4,14 +4,14 @@ const bookingRoute =Router();
 
 import {
   getAllBooking,
-  getBookingDetails,
   scheduleBooking,
   cancelBooking,
+  getBookingById,
 } from "../controllers/bookingController";
 
 
 bookingRoute.get("/", getAllBooking);
-bookingRoute.get("/:idBkg", getBookingDetails);
+bookingRoute.get("/:idBkg", getBookingById);
 bookingRoute.post("/schedule", scheduleBooking);
 bookingRoute.put("/cancel/:idBkg", cancelBooking);
 

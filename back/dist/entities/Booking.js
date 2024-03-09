@@ -22,11 +22,11 @@ __decorate([
 ], Booking.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Booking.prototype, "date", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", Date)
+    __metadata("design:type", String)
 ], Booking.prototype, "time", void 0);
 __decorate([
     (0, typeorm_1.Column)(),

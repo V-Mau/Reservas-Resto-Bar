@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cancelBooking = exports.scheduleBooking = exports.getBookingDetails = exports.getAllBooking = void 0;
+exports.cancelBooking = exports.scheduleBooking = exports.getBookingById = exports.getAllBooking = void 0;
 const bookingService_1 = require("../service/bookingService");
 const getAllBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,28 +21,25 @@ const getAllBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.getAllBooking = getAllBooking;
-const getBookingDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id } = req.params;
+const getBookingById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const lookingBooking = yield (0, bookingService_1.getBookingDetailsService)(Number(id));
-        if (!lookingBooking) {
-            res.status(404).json({ message: "Reserva no realizada" });
-            return;
-        }
+        const { appId } = req.params;
+        const bookingId = Number(appId);
+        const lookingBooking = yield (0, bookingService_1.getBookingByIdService)(bookingId);
         res.status(200).json(lookingBooking);
     }
     catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(400).json({ message: error.message });
     }
 });
-exports.getBookingDetails = getBookingDetails;
+exports.getBookingById = getBookingById;
 const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { date, time, user_id, status, description } = req.body;
         const newBooking = yield (0, bookingService_1.scheduleBookingService)({
             date, time, user_id, status, description,
         });
-        res.status(200).json(newBooking);
+        res.status(201).json(newBooking);
     }
     catch (error) {
         res.status(400).json({ message: error.message });
@@ -50,10 +47,10 @@ const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function
 });
 exports.scheduleBooking = scheduleBooking;
 const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { appId } = req.params;
     try {
-        const booking_id = Number(req.params.id);
-        const result = yield (0, bookingService_1.cancelBookingService)(booking_id);
-        res.status(200).json(result);
+        yield (0, bookingService_1.cancelBookingService)(Number(appId));
+        res.status(200).json({ message: "Reserva cancelada" });
     }
     catch (error) {
         res.status(404).json({ message: error.message });

@@ -4,7 +4,7 @@ const express_1 = require("express");
 const bookingRoute = (0, express_1.Router)();
 const bookingController_1 = require("../controllers/bookingController");
 bookingRoute.get("/", bookingController_1.getAllBooking);
-bookingRoute.get("/:idBkg", bookingController_1.getBookingDetails);
+bookingRoute.get("/:idBkg", bookingController_1.getBookingById);
 bookingRoute.post("/schedule", bookingController_1.scheduleBooking);
 bookingRoute.put("/cancel/:idBkg", bookingController_1.cancelBooking);
 exports.default = bookingRoute;
