@@ -1,0 +1,21 @@
+.CardMenu {
+    display: flex;
+    padding: 0.5em;
+    align-items: center;
+    font-size: 1.2em;
+    text-align: justify;
+    margin:15px;
+    background-color: greenyellow;
+    border-radius: 10px;
+    /* img {
+        width: 2em;;
+        padding: 20px;
+    
+    } */
+
+}
+.ImgCard {
+    width: 300px; 
+    padding: 20px;
+}
+

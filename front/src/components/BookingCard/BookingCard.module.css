@@ -1,0 +1,29 @@
+.bookingCard {
+    background-color: aqua;
+    color: black;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.active {
+    color: green;
+    &:hover {
+        cursor: pointer;
+        color: greenyellow
+    }
+
+}
+
+.canceled {
+    color: rgb(255, 3, 3);
+    &:hover {
+        cursor: pointer;
+        color: orange;
+    }
+}
+
+   

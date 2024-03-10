@@ -1,0 +1,45 @@
+.navbarContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: aqua;
+    color: lightcyan;
+}
+
+.logoSection {
+    display: flex;
+    flex-direction: row;
+    img {
+        height: 90px;
+        padding : 20px 0 20px 20px;
+        width: 90px;
+        border-radius: 50%;
+        
+    }
+}
+
+.avatarSection {
+    display: flex;
+    flex-direction: row;
+    img {
+        height: 50px;
+        padding : 40px 40px ;
+        width: 50px;
+        border-radius: 50%;
+        
+    }
+}
+
+.linkSection {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    gap: 20px;
+    font-size: 1.2em;
+    text-shadow: 1px 3px 6px black;
+    span:hover {
+        color: greenyellow;
+        cursor:pointer;
+    }
+}  
