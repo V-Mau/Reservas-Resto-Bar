@@ -1,0 +1,37 @@
+.backgroundCustom {
+    background-image: url('../../../Img/Misuki-food-sushi-_1_.webp');
+    background-position: center center;
+    background-size: cover;
+    width: 100vw; /* Ancho igual al ancho de la ventana del navegador */
+    height: 100vh; /* Altura igual a la altura de la ventana del navegador */
+    overflow: hidden; /* Evita el desbordamiento del contenido */
+}
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh; /* Altura para centrar el botón */
+}
+
+.button {
+    background-color: #030303;
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Tamaño de padding ajustado para hacer el botón más pequeño */
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px; /* Tamaño de fuente reducido para hacer el botón más elegante */
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+}
+.buttonWrapper {
+    position:absolute;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    margin-right: 400px;
+}
+
+
+.button:hover {
+    background-color: #1a1a1a; /* Cambio de color de fondo al pasar el ratón */
+}
