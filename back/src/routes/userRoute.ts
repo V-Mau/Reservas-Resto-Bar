@@ -1,15 +1,12 @@
 // * Paso 5 = Router (userRoute)
-import {Router} from 'express'
-import { getAllUsers, getUserById, userLogin, userRegister }from '../controllers/userController';
+import { Router } from 'express';
+import { createUser, getAllUsers, getUserById, userLogin,  } from '../controllers/userController';
 
 const userRoute = Router();
 
-
-
 userRoute.get('/', getAllUsers);
-userRoute.get('/:id',getUserById);
-userRoute.post('/register',userRegister);
-userRoute.post('/login',userLogin)
-
+userRoute.get('/:id', getUserById);
+userRoute.post('/register',createUser );
+userRoute.post('/login', userLogin);
 
 export default userRoute;

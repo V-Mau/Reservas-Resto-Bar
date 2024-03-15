@@ -9,6 +9,8 @@ const indexRoute = Router()
 
 
 indexRoute.use('/users', userRoute);
+
 indexRoute.use('/bookings',bookingRoute);
+
 
 export default indexRoute;

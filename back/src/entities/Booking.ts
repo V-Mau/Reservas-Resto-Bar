@@ -12,7 +12,7 @@ class Booking {
     @Column()
     time: string;
 
-    @Column()
+    @Column({ default: "active"})
     status: string;
 
     @Column()

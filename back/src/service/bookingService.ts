@@ -1,7 +1,7 @@
 // bookingService.ts
 
 import { createBookingDto } from "../Dto/IBookingDto";
-import { bookingModel, usersModel } from "../config/repository";
+import { bookingModel, userModel } from "../config/repository";
 import Booking from "../entities/Booking";
 import User from "../entities/User";
 
@@ -24,7 +24,7 @@ export const scheduleBookingService = async (createBookingDto: createBookingDto)
 
     const newBooking: Booking = bookingModel.create(createBookingDto);
     await bookingModel.save(newBooking);
-   const user: User | null = await usersModel.findOneBy({
+   const user: User | null = await userModel.findOneBy({
         id: createBookingDto.user_id
 
         
@@ -38,13 +38,6 @@ export const scheduleBookingService = async (createBookingDto: createBookingDto)
 
 
 
-
-    
-
-
-
-
-
 export const cancelBookingService = async (appId: number): Promise<void> => {
     const cancelBooking: Booking | null = await bookingModel.findOneBy({
         id: appId,
@@ -53,4 +46,3 @@ export const cancelBookingService = async (appId: number): Promise<void> => {
     cancelBooking.status = 'cancelled';
     await bookingModel.save(cancelBooking);
 }
-

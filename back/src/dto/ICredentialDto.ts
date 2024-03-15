@@ -1,4 +1,4 @@
-// PASO 10-1a = DTO (Data Transfer Object)
+
 
  export interface createCredentialDto {
     

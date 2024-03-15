@@ -1,4 +1,4 @@
-// * Paso 3 = envs.ts
+
 import'dotenv/config';
 
 

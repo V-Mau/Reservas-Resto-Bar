@@ -24,10 +24,11 @@ import Credential from './Credential'
 
     @OneToOne(() => Credential, (credential) => credential.user)
     @JoinColumn()
-    credentials: Credential;
+    credential: Credential;
 
     @OneToMany(() => Booking, (booking) => booking.user)
     bookings: Booking[];
+    
     
 }
 export default User;

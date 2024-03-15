@@ -9,10 +9,14 @@ import {
   getBookingById,
 } from "../controllers/bookingController";
 
+bookingRoute.use("/:id", (req, res, next) => {
+  console.log('Middleware de depuración para rutas de booking');
+  next();
+});
 
 bookingRoute.get("/", getAllBooking);
-bookingRoute.get("/:idBkg", getBookingById);
+bookingRoute.get("/:id", getBookingById);
 bookingRoute.post("/schedule", scheduleBooking);
-bookingRoute.put("/cancel/:idBkg", cancelBooking);
+bookingRoute.put("/cancel/:id", cancelBooking);
 
 export default bookingRoute;
