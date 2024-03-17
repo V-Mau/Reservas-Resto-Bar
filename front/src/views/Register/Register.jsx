@@ -80,7 +80,8 @@ export const Register = (props) => {
   return (
     <div className={styles.container}>
 
-      <h2>Registro</h2>
+      <h1>Registro</h1>
+      
 
       <form onSubmit={handleSubmit}>
         {formData.map(({label, name, type, placeholder}) => {
@@ -100,9 +101,10 @@ export const Register = (props) => {
                }
                </div>
               );
-        })};
+        })}
         <button 
           type="submit"
+          disabled={Object.keys(user).some((e) => !user[e])}
          >
           Registrarse
         </button>
@@ -110,5 +112,5 @@ export const Register = (props) => {
       </form>
 
     </div>
-  );
+  )
 };

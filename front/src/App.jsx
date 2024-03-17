@@ -10,27 +10,27 @@ import { Landing } from "./views/Landing/Landing";
 
 function App() {
 
-  const users = useSelector(state => state.users)
+  const users = useSelector(state => state.actualUser)
   console.log(users );
+
+  
 
   return (
     <div>
     
-
-    <NavBar/>
+     <NavBar/>
     <Routes>
       <Route path="/" element={<Landing/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/Register" element={<Register/>}/>
-      <Route path="/Home" element={<Home/>}/>
+      <Route path="/register" element={<Register/>}/>
+      <Route path="/home" element={<Home/>}/>
       <Route path="/bookings" element={<MyBooking/>}/>
+      <Route path="/bookingForm" element={<BookingForm/>}/>
     </Routes>
-    
-    
-
-      
     </div>
-  );
-}
-
-export default App;
+    
+    );
+  }
+    
+  export default App;
+      

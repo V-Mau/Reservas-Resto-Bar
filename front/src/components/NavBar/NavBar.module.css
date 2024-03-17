@@ -1,9 +1,11 @@
+
 .navbarContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgba(2, 2, 2, 0.952);
-    color: lightcyan;
+    background-color: rgba(2, 2, 2, 0.733);
+    font-family: 'Space Grotesk',Arial, Helvetica, sans-serif;
+    color: #e6bf9a;
 }
 
 .logoSection {
@@ -11,7 +13,7 @@
     flex-direction: row;
     img {
         height: 90px;
-        padding : 20px 0 20px 20px;
+        padding : 20px ;
         width: 90px;
         border-radius: 50%;
         
@@ -37,13 +39,17 @@
     padding-bottom: 20px;
     gap: 20px;
     font-size: 1.2em;
-    text-shadow: 1px 3px 6px black;
-    span:hover {
-        color: greenyellow;
-        cursor:pointer;
-    }
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
-}  
+    text-shadow: 1px 3px 6px rgb(247, 242, 242);
+}
+
+.linkSection a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s; transform: 0.5s  ease-out; 
+}
+
+.linkSection a:hover {
+    color: #e2e6e5; 
+    cursor: pointer;
+    transform: translateY(-2px);
+}

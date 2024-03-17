@@ -1,37 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+
+
+
 .backgroundCustom {
-    background-image: url('../../../Img/Misuki-food-sushi-_1_.webp');
+    background-image: url('../../../Img/Misuki-food-sushi.webp');
     background-position: center center;
     background-size: cover;
-    width: 100vw; /* Ancho igual al ancho de la ventana del navegador */
-    height: 100vh; /* Altura igual a la altura de la ventana del navegador */
-    overflow: hidden; /* Evita el desbordamiento del contenido */
+    width: 100vw; 
+    height: 100vh; 
+    overflow: hidden; 
 }
+
+
+
 .buttonContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70vh; /* Altura para centrar el botón */
+    position: absolute; 
+    top: 80%; 
+    left: 73.3%; 
+    transform: translate(-50%, -50%); 
 }
+
 
 .button {
-    background-color: #030303;
+    background-color: #e6bf9a62;
     border: none;
-    color: white;
-    padding: 10px 20px; /* Tamaño de padding ajustado para hacer el botón más pequeño */
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px; /* Tamaño de fuente reducido para hacer el botón más elegante */
+    color: rgb(255, 255, 255);
+    padding: 20px 30px; 
     cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s; /* Transición suave del color de fondo */
+    font-family: 'Space Grotesk', Arial, Helvetica, sans-serif; 
+    font-size: 35px;
+   box-shadow: 3px 3px 8px #e6bf9abd;
 }
-.buttonWrapper {
-    position:absolute;
-    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
-    margin-right: 400px;
-}
-
 
 .button:hover {
-    background-color: #1a1a1a; /* Cambio de color de fondo al pasar el ratón */
+    background-color: rgba(167, 115, 89, 0.295);
 }
+/*  */

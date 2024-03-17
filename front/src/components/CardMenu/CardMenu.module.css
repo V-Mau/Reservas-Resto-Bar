@@ -1,19 +1,28 @@
+.container {
+  display: flex;
+  justify-items: space-between; /* Espacio entre columnas */
+}
+
+.column {
+  display: flex;
+ align-items: place-items;
+ justify-items: place-items;
+}
+
 .CardMenu {
+    color:rgb(253, 253, 253);
+    position: relative;  
     display: flex;
     padding: 0.5em;
     align-items: center;
     font-size: 1.2em;
     text-align: justify;
     margin:15px;
-    background-color: greenyellow;
+    background-color:#fa7b0450;
     border-radius: 10px;
-    /* img {
-        width: 2em;;
-        padding: 20px;
-    
-    } */
-
+    width: 48%;
 }
+
 .ImgCard {
     width: 300px; 
     padding: 20px;
