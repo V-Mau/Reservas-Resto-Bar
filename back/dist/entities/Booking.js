@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], Booking.prototype, "time", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ default: "active" }),
     __metadata("design:type", String)
 ], Booking.prototype, "status", void 0);
 __decorate([

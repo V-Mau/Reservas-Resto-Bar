@@ -11,8 +11,8 @@ const Booking_1 = __importDefault(require("../entities/Booking"));
 const envs_1 = require("./envs");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "postgres",
-    host: envs_1.DB_HOST,
-    port: Number(envs_1.DB_PORT),
+    host: envs_1.DB_HOST || "localhost",
+    port: Number(envs_1.DB_PORT) || 5432,
     username: envs_1.DB_USER,
     password: envs_1.DB_PASSWORD,
     database: envs_1.DB_NAME,

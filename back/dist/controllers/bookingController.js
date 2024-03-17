@@ -22,10 +22,14 @@ const getAllBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.getAllBooking = getAllBooking;
 const getBookingById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    console.log('Solicitud recibida en /bookings/:id. ID de reserva:', id);
     try {
-        const { appId } = req.params;
-        const bookingId = Number(appId);
+        const bookingId = Number(id);
         const lookingBooking = yield (0, bookingService_1.getBookingByIdService)(bookingId);
+        if (!lookingBooking) {
+            return res.status(404).json({ message: "Reserva no encontrada" });
+        }
         res.status(200).json(lookingBooking);
     }
     catch (error) {
@@ -47,9 +51,9 @@ const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function
 });
 exports.scheduleBooking = scheduleBooking;
 const cancelBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { appId } = req.params;
+    const { id } = req.params;
     try {
-        yield (0, bookingService_1.cancelBookingService)(Number(appId));
+        yield (0, bookingService_1.cancelBookingService)(Number(id));
         res.status(200).json({ message: "Reserva cancelada" });
     }
     catch (error) {

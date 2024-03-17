@@ -41,7 +41,7 @@ __decorate([
     (0, typeorm_1.OneToOne)(() => Credential_1.default, (credential) => credential.user),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", Credential_1.default)
-], User.prototype, "credentials", void 0);
+], User.prototype, "credential", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => Booking_1.default, (booking) => booking.user),
     __metadata("design:type", Array)

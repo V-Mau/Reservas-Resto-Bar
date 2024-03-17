@@ -9,40 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userLoginService = exports.userRegisterService = exports.getUserByIdService = exports.getAllUsersService = void 0;
+exports.userLoginService = exports.createUserService = exports.getUserByIdService = exports.getAllUsersService = void 0;
 const credentialService_1 = require("./credentialService");
 const repository_1 = require("../config/repository");
 const getAllUsersService = () => __awaiter(void 0, void 0, void 0, function* () {
-    const allUsers = yield repository_1.usersModel.find({
+    const allUsers = yield repository_1.userModel.find({
         relations: { bookings: true },
     });
     return allUsers;
 });
 exports.getAllUsersService = getAllUsersService;
 const getUserByIdService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const lookingUser = yield repository_1.usersModel.findOne({
-        where: { id }, relations: { bookings: true }
+    const foundUser = yield repository_1.userModel.findOne({
+        where: { id },
+        relations: ['bookings']
     });
-    if (!lookingUser)
-        throw Error('Usuario no encontrado');
-    return lookingUser;
+    if (!foundUser) {
+        throw new Error('Usuario no encontrado');
+    }
+    return foundUser;
 });
 exports.getUserByIdService = getUserByIdService;
-const userRegisterService = (createUserDto) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = repository_1.usersModel.create(createUserDto);
+const createUserService = (createUserDto) => __awaiter(void 0, void 0, void 0, function* () {
+    const newUser = repository_1.userModel.create(createUserDto);
     const newCredential = yield (0, credentialService_1.credentialService)({
         username: createUserDto.username,
         password: createUserDto.password
     });
-    yield repository_1.usersModel.save(newUser);
-    newUser.credentials = newCredential;
-    yield repository_1.usersModel.save(newUser);
+    yield repository_1.userModel.save(newUser);
+    newUser.credential = newCredential;
+    yield repository_1.userModel.save(newUser);
     return newUser;
 });
-exports.userRegisterService = userRegisterService;
-const userLoginService = (credentialsId) => __awaiter(void 0, void 0, void 0, function* () {
-    const foundUser = yield repository_1.usersModel.findOneBy({
-        credentials: { id: credentialsId }
+exports.createUserService = createUserService;
+const userLoginService = (credentiaId) => __awaiter(void 0, void 0, void 0, function* () {
+    const foundUser = yield repository_1.userModel.findOneBy({
+        credential: { id: credentiaId }
     });
     return foundUser;
 });
