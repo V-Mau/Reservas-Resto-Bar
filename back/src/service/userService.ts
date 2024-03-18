@@ -32,7 +32,7 @@ export const getUserByIdService = async (id: number): Promise<User | null> => {
 
 
 export const createUserService = async (createUserDto: createUserDto  ): Promise<User> => {
-    const newUser: User = userModel.create(createUserDto);
+    const newUser: User =  await userModel.create(createUserDto);
     // console.log("Nuevo usuario creado en el servicio:", newUser);
     
     const newCredential: Credential = await credentialService({

@@ -31,7 +31,7 @@ const getUserByIdService = (id) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.getUserByIdService = getUserByIdService;
 const createUserService = (createUserDto) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = repository_1.userModel.create(createUserDto);
+    const newUser = yield repository_1.userModel.create(createUserDto);
     const newCredential = yield (0, credentialService_1.credentialService)({
         username: createUserDto.username,
         password: createUserDto.password

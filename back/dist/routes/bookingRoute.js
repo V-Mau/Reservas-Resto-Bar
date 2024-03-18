@@ -4,7 +4,6 @@ const express_1 = require("express");
 const bookingRoute = (0, express_1.Router)();
 const bookingController_1 = require("../controllers/bookingController");
 bookingRoute.use("/:id", (req, res, next) => {
-    console.log('Middleware de depuración para rutas de booking');
     next();
 });
 bookingRoute.get("/", bookingController_1.getAllBooking);

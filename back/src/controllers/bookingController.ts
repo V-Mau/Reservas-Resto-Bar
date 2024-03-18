@@ -38,6 +38,7 @@ export const getBookingById = async (req:Request,res:Response) => {
 export const scheduleBooking = async (req: Request,res:Response) => {
     try {
         const { date, time, user_id, status, description} = req.body;
+        console.log('Solicitud recibida en /bookings. Datos de la reserva:', date, time, user_id, status, description);
         const newBooking : Booking = await scheduleBookingService({
             date, time, user_id, status, description,
             

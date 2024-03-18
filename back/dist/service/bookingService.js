@@ -26,6 +26,7 @@ const getBookingByIdService = (appId) => __awaiter(void 0, void 0, void 0, funct
 });
 exports.getBookingByIdService = getBookingByIdService;
 const scheduleBookingService = (createBookingDto) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Datos recibidos en el servicio:", createBookingDto);
     const newBooking = repository_1.bookingModel.create(createBookingDto);
     yield repository_1.bookingModel.save(newBooking);
     const user = yield repository_1.userModel.findOneBy({

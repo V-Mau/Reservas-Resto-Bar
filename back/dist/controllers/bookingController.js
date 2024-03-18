@@ -40,6 +40,7 @@ exports.getBookingById = getBookingById;
 const scheduleBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { date, time, user_id, status, description } = req.body;
+        console.log('Solicitud recibida en /bookings. Datos de la reserva:', date, time, user_id, status, description);
         const newBooking = yield (0, bookingService_1.scheduleBookingService)({
             date, time, user_id, status, description,
         });

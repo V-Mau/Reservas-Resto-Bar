@@ -10,7 +10,7 @@ import {
 } from "../controllers/bookingController";
 
 bookingRoute.use("/:id", (req, res, next) => {
-  console.log('Middleware de depuración para rutas de booking');
+ 
   next();
 });
 

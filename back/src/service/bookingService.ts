@@ -21,7 +21,7 @@ export const getBookingByIdService = async (appId: number): Promise<Booking | nu
 };
 
 export const scheduleBookingService = async (createBookingDto: createBookingDto): Promise<Booking> => {
-
+    console.log("Datos recibidos en el servicio:", createBookingDto);
     const newBooking: Booking = bookingModel.create(createBookingDto);
     await bookingModel.save(newBooking);
    const user: User | null = await userModel.findOneBy({
