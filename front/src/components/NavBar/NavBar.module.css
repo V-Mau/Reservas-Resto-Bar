@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgba(2, 2, 2, 0.733);
+    background-color: rgba(2, 2, 2, 0.856);
     font-family: 'Space Grotesk',Arial, Helvetica, sans-serif;
     color: #e6bf9a;
 }
@@ -42,14 +42,25 @@
     text-shadow: 1px 3px 6px rgb(247, 242, 242);
 }
 
+
 .linkSection a {
     text-decoration: none;
     color: inherit;
-    transition: color 0.3s; transform: 0.5s  ease-out; 
+    transition: color 0.3s, transform 0.3s ease; 
 }
 
 .linkSection a:hover {
-    color: #e2e6e5; 
+    color: #e2e6e5;
     cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.linkSection span {
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+.linkSection span:hover {
+    color: #e2e6e5;
     transform: translateY(-2px);
 }

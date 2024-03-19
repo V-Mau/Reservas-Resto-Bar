@@ -1,3 +1,24 @@
+
 .container {
-    background-color: aliceblue;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* background: linear-gradient(to bottom, #020202ad, #858484a4); */
+   
+  }
+
+  .container h1 {
+    
+      color: #e6bf9a;
+      text-align: center;
+      margin-top: 20px;
+      font-size: large;
+    
+
+
+
+  }
+
+
+ 

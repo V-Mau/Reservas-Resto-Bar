@@ -7,6 +7,10 @@ import { Login } from "./views/Login/Login";
 import { Register }  from './views/Register/Register';
 import { useSelector } from "react-redux";
 import { Landing } from "./views/Landing/Landing";
+import { BookingForm } from "./views/BookingForm/BookingForm";
+import { About } from "./views/Abuot/Abaout";
+import { Contacto } from "./views/Contactos/Contacto";
+
 
 function App() {
 
@@ -25,7 +29,9 @@ function App() {
       <Route path="/register" element={<Register/>}/>
       <Route path="/home" element={<Home/>}/>
       <Route path="/bookings" element={<MyBooking/>}/>
-      <Route path="/bookingForm" element={<BookingForm/>}/>
+      <Route path="/bookings/schedule" element={<BookingForm/>}/>
+      <Route path="/about" element={<About/>}/>
+      <Route path="/contact" element={<Contacto/>}/>
     </Routes>
     </div>
     

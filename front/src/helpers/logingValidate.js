@@ -8,7 +8,7 @@ export const validate = ({ username, password }) => {
    if (!regexUsername.test(username)) errors.username = 'Usuario inválido';
 
    if (!password) errors.password = 'Ingresar contraseña';
-   if (!regexPassword.test(password)) errors.password = 'Contraseña inválida';
+   // if (!regexPassword.test(password)) errors.password = 'Contraseña inválida';
 
    return errors; 
 }

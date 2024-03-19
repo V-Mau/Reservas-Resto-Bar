@@ -4,17 +4,19 @@ import avatar from "../../../Img/Kardus Zomm.jpeg";
 import StyleSheet from "./NavBar.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
+import { setUserData, setUserBooking } from "../../Redux/usersSlice";
 
 
 export const NavBar = () => {
   const login = useSelector(state => state.actualUser?.userData?.login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     const confirmetion = window.confirm("¿Deseas cerrar sesión?");
     if(confirmetion){
       dispatch(setUserData({}));
-      dispatch(setUserBookingg([]));
+      dispatch(setUserBooking([]));
       navigate("/") // en mi caso es landing
     }
   }
@@ -34,13 +36,13 @@ export const NavBar = () => {
         { 
         login && 
         <NavLink to="/bookings"> 
-        <span>RESERVAS</span>
+        <span >RESERVAS</span>
         </NavLink> 
         }
          { 
         login && 
-        <NavLink to="/bookings"> 
-        <span>Nueva Reserva</span>
+        <NavLink to="/bookings/schedule"> 
+        <span>NUEVA RESERVA</span>
         </NavLink> 
         }
 

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./Register.module.css";
 import { validateRegister } from "../../helpers/registerValidate";
 import axios from 'axios';
+import {Link, useNavigate} from 'react-router-dom';
+
 
 export const Register = (props) => {
   const initialState ={
@@ -16,6 +18,7 @@ export const Register = (props) => {
   //? ESTADOS (STATE)
   const [dataRegister, setDataRegister] = useState(initialState);
   const [errors, setErrors] = useState(initialState);
+  const navigate = useNavigate();
 
 
 // ? HANDLERS
@@ -61,6 +64,7 @@ export const Register = (props) => {
           password: "",
           confirmpassword: ""
         });
+        navigate('/login');
       })
       .catch(error => {
         console.error("Error en la petición de registro:", error);
@@ -77,6 +81,8 @@ export const Register = (props) => {
     {label: "Confirmar contraseña", name: "confirmpassword", type: "password", placeholder: "Confirmar contraseña"},
   ];
 
+ 
+
   return (
     <div className={styles.container}>
 
@@ -86,7 +92,7 @@ export const Register = (props) => {
       <form onSubmit={handleSubmit}>
         {formData.map(({label, name, type, placeholder}) => {
           return (
-            <div key={name}>
+            <div key={name} className= {errors[name] ? styles.errorField : '' }>
               <label htmlFor={name}>{label}</label>
               <input
                type={type}
@@ -102,15 +108,17 @@ export const Register = (props) => {
                </div>
               );
         })}
-        <button 
-          type="submit"
-          disabled={Object.keys(user).some((e) => !user[e])}
-         >
-          Registrarse
-        </button>
+       <div>
+       
+       
+          <button type="submit" className={styles.submitButton}>
+            Registrarse
+          </button>
+        
+       </div>
               
       </form>
-
+      <p>¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link></p>
     </div>
   )
 };

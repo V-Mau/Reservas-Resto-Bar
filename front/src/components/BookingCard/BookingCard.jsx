@@ -1,4 +1,4 @@
-// BookingCard
+
 import React from 'react';
 import Styles from './BookingCard.module.css'
 
@@ -20,17 +20,21 @@ export const BookingCard = ({ id, date, time, status, description, handleCancel 
   }
   return (
     
+     <div className={Styles.container}>
+      <h1>Reservación</h1>
       <div className={Styles.bookingCard}>
-        <p> Reservación</p>
+        
         <span>{dateFormat}</span>
         <span>{time} hs</span>
         <span>{description}</span>
-        {status === 'active' ? ( <span className={Styles.active } onClick={handleClick}>
-          Activo (cancelar)
+        {status === 'active' ? ( <span className={Styles.cancelButton } onClick={handleClick}>
+          Cancelar
           </span>) : ( <span className={Styles.cancelled}>Cancelado</span>)
           }
        
       </div>
+     </div>
+      
     
   );
 }

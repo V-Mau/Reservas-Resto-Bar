@@ -3,14 +3,11 @@ import React, { useState } from "react";
 import styles from "../Register/Register.module.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { validateBooking } from "../../helpers/validateBookins";
 
 const BOOKING_URL = "http://localhost:3000/bookings/schedule";
-const regexFecha = /^\d{4}-\d{2}-\d{2}$/;
 
-const MIN_LONGITUD_DESCRIPCION = 5;
-const MAX_LONGITUD_DESCRIPCION = 100;
-
-export const bookingForm = (orops) => {
+export const BookingForm = () => {
   const initialState = {
     date: "",
     time: "",
@@ -20,20 +17,9 @@ export const bookingForm = (orops) => {
   const [booking, setBooking] = useState(initialState);
   const [errors, setErrors] = useState({ date: "Debe registrar una fecha" });
 
-  const validateBooking = ({ date, time, description }) => {
-    const errors = {};
-    if (!date) errors.date = "Debe registrar una fecha";
-    if (!regexFecha.test(date)) errors.date = "Debe registrar una fecha válida";
-    if (!time) errors.time = "Debe registrar un horario";
-    if (!description) errors.description = "Debe registrar una descripción";
-    if (description.length < MIN_LONGITUD_DESCRIPCION)
-      errors.description = "La descripción debe tener al menos 5 caracteres";
-    if (description.length > MAX_LONGITUD_DESCRIPCION)
-      errors.description = "La descripción debe tener menos de 100 caracteres";
-    return errors;
-  };
-
-  const userId = useSelector((state) => state?.actualUser?.user?.id);
+  const user_id = useSelector((state) =>  state.actualUser.userData.user.id );
+  console.log( 'Que Trae:', user_id);
+  const userData = useSelector((state) => state.actualUser.userData.user.id);
 
   const navigate = useNavigate();
 
@@ -41,16 +27,16 @@ export const bookingForm = (orops) => {
     event.preventDefault();
     const newBookings = {
       ...booking,
-      userId,
+      user_id,
     };
-
+    console.log(newBookings);
     axios
-      .post(BOOKING_URL + newBookings)
+      .post(BOOKING_URL, newBookings)
       .then(({ data }) => data)
       .then((bookingInDB) => {
-        alert(`Reserva realizada con exito:
+        alert(`Reserva realizada con éxito:
             Fecha: ${bookingInDB.date}`);
-        useNavigate("/bookings");
+        navigate("/bookings");
       })
       .catch((error) => error.message);
   };
@@ -58,7 +44,7 @@ export const bookingForm = (orops) => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setBooking({ ...booking, [name]: value });
-    setErrors(handleValidation({ ...booking, [name]: value }));
+    setErrors(validateBooking({ ...booking, [name]: value }));
   };
 
   const formData = [
@@ -72,11 +58,11 @@ export const bookingForm = (orops) => {
       label: "Horario",
       name: "time",
       type: "time",
-      placeholder: "ingresar horario",
+      placeholder: "Ingresar horario",
     },
     {
-      label: "Descrioción",
-      name: "dscription",
+      label: "Descripción",
+      name: "description",
       type: "text",
       placeholder: "Ingresar descripción",
     },
@@ -105,12 +91,7 @@ export const bookingForm = (orops) => {
             </div>
           );
         })}
-        <button
-          type="submit"
-          disabled={Object.keys(booking).some((e) => !booking[e])}
-        >
-          Crear reserva...
-        </button>
+        <button type="submit">Crear reserva...</button>
       </form>
     </div>
   );

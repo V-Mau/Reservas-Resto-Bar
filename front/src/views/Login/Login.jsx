@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'; 
 import { setUserData } from '../../Redux/usersSlice';
+import { validate } from '../../helpers/logingValidate'; 
 
 const USERLOGIN = "http://localhost:3000/users/login";
 
@@ -30,7 +31,7 @@ export const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         
-        const formErrors = validate(user);
+        const formErrors = validate(user); 
         setErrors(formErrors);
 
         if (Object.keys(formErrors).length === 0) {
@@ -83,13 +84,4 @@ export const Login = () => {
             </form>
         </div>
     );
-};
-
-const validate = ({ username, password }) => {
-    const errors = {};
-
-    if (!username) errors.username = 'Ingresar usuario';
-    if (!password) errors.password = 'Ingresar contraseña';
-
-    return errors; 
 };

@@ -8,11 +8,11 @@ export const Landing = () => {
                 
             <div className={style.backgroundCustom}>
                
-                    <div className={style.buttonContainer}>
+                    {/* <div className={style.buttonContainer}>
                         <Link to="/login">
                             <button type="submit" className={style.button}><h1>Bienvenid@</h1></button>
                         </Link>
-                    </div>
+                    </div> */}
                 
             </div>
         </>
