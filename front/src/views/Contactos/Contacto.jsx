@@ -6,7 +6,7 @@ import githubImg from "../../../Img/imgContact/github (1).png";
 import twitterImg from "../../../Img/imgContact/gorjeo (1).png";
 import linkedinImg from "../../../Img/imgContact/linkedin.png";
 
-const Contacto = () => {
+export const Contacto = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}></h2>
@@ -31,4 +31,4 @@ const Contacto = () => {
   );
 }
 
-export default Contacto;
+;
