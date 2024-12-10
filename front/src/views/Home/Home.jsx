@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { CardMenu } from '../../components/CardMenu/CardMenu';
 import VerticalCardMenu from '../../components/VerticalCardMenu/VerticalCardMenu'; 
 import Styles from './Home.module.css';

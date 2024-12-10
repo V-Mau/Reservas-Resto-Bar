@@ -1,66 +1,75 @@
-
-.navbarContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: rgba(2, 2, 2, 0.856);
-    font-family: 'Space Grotesk',Arial, Helvetica, sans-serif;
-    color: #e6bf9a;
+.navbarContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: rgba(2, 2, 2, 0.856);
+  font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+  color: #e6bf9a;
 }
 
 .logoSection {
-    display: flex;
-    flex-direction: row;
-    img {
-        height: 90px;
-        padding : 20px ;
-        width: 90px;
-        border-radius: 50%;
-        
-    }
+  display: flex;
+  flex-direction: row;
+  img {
+    height: 90px;
+    padding: 20px;
+    width: 90px;
+    border-radius: 50%;
+  }
 }
 
 .avatarSection {
-    display: flex;
-    flex-direction: row;
-    img {
-        height: 50px;
-        padding : 40px 40px ;
-        width: 50px;
-        border-radius: 50%;
-        
-    }
+  display: flex;
+  flex-direction: column; /* Cambié la dirección a columna */
+  align-items: center; /* Centrado de los elementos dentro del avatarSection */
+  margin-right: 20px; /* Agregado espacio para alejar del borde derecho */
+  margin-top: 10px;
+  padding: 20px;
+}
+
+.avatarSection img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.avatarSection .userName {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e6bf9a;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .linkSection {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    padding-bottom: 20px;
-    gap: 20px;
-    font-size: 1.2em;
-    text-shadow: 1px 3px 6px rgb(247, 242, 242);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding-bottom: 20px;
+  margin-right: 20px;
+  gap: 20px;
+  font-size: 1em;
+  text-shadow: 1px 3px 6px rgb(247, 242, 242);
 }
 
-
 .linkSection a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s, transform 0.3s ease; 
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s, transform 0.3s ease;
 }
 
 .linkSection a:hover {
-    color: #e2e6e5;
-    cursor: pointer;
-    transform: translateY(-2px);
+  color: #e2e6e5;
+  cursor: pointer;
+  transform: translateY(-2px);
 }
 
 .linkSection span {
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s ease;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s ease;
 }
 
 .linkSection span:hover {
-    color: #e2e6e5;
-    transform: translateY(-2px);
+  color: #e2e6e5;
+  transform: translateY(-2px);
 }

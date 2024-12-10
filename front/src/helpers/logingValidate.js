@@ -1,6 +1,6 @@
 export const validate = ({ username, password }) => {
    const regexUsername = /^[a-zA-Z0-9_-]{3,16}$/;
-   const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d_-]{8,}$/;
+   // const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d_-]{8,}$/;
 
    const errors = {};
    

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import styles from "./Register.module.css";
 import { validateRegister } from "../../helpers/registerValidate";
@@ -5,7 +6,7 @@ import axios from 'axios';
 import {Link, useNavigate} from 'react-router-dom';
 
 
-export const Register = (props) => {
+export const Register = (_props) => {
   const initialState ={
     name: "",
     email: "",

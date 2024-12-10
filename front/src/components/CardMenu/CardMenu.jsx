@@ -1,7 +1,6 @@
-
-
-import React from "react";
 import Styles from "./CardMenu.module.css";
+
+import PropTypes from "prop-types";
 
 export const CardMenu = ({ images }) => {
   return (
@@ -20,4 +19,8 @@ export const CardMenu = ({ images }) => {
       ))}
     </div>
   );
-}
+};
+
+CardMenu.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
+};
