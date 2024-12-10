@@ -1,5 +1,7 @@
 
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useMemo } from 'react';
+
 import { BookingCard } from '../../components/BookingCard/BookingCard';
 import { setUserBooking } from '../../Redux/usersSlice';
 import axios from 'axios';
@@ -30,15 +32,15 @@ export const MyBooking = () => {
   const CANCEL_URL = "http://localhost:3000/bookings/cancel/";
   const handleCancel = (bookingId) => {
     axios.put(CANCEL_URL + bookingId)
-      .then(response => response.data)
-      .then(data => {
+      .then(() => { // No es necesario guardar la respuesta en 'data' si no la usas
         axios.get(GET_USER_BY_ID_URL + actualUserId)
           .then(response => response.data.bookings)
           .then(bookings => dispatch(setUserBooking(bookings)))
           .catch(error => console.log(error.message));
       })
       .catch(error => alert(`Error al cancelar la reserva: ${error?.response?.data?.message}`)); 
-  }; 
+  };
+  
 
   return (
     <div className={Styles.container}>
@@ -56,7 +58,7 @@ export const MyBooking = () => {
             handleCancel={handleCancel}
            />
         )) :
-        <h2>No hay reservas</h2>
+        <h2>No hay reservas  </h2>
       }
     </div> 
   );

@@ -1,4 +1,5 @@
 import axios from "axios";
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import styles from "../Register/Register.module.css";
 import { useSelector } from "react-redux";
@@ -19,7 +20,6 @@ export const BookingForm = () => {
 
   const user_id = useSelector((state) =>  state.actualUser.userData.user.id );
   console.log( 'Que Trae:', user_id);
-  const userData = useSelector((state) => state.actualUser.userData.user.id);
 
   const navigate = useNavigate();
 

@@ -8,12 +8,13 @@
    
   }
 
-  .container h1 {
+  .container h2 {
     
       color: #e6bf9a;
       text-align: center;
       margin-top: 20px;
-      font-size: large;
+      margin-bottom: 20px;
+      font-size: 30px;
     
 
 

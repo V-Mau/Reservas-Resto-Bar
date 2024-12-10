@@ -1,17 +1,17 @@
 .VerticalCardMenu {
-  background-color: #0e0d0dbb;
-  max-height: 400px;
+  background-color: #000000;
+  max-height: 550px;
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
+  width: 350px;
   border: 5px solid #14141436;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(248, 245, 245, 0.1);
   margin: 10px;
-  padding: 10px;
+  padding: 5px;
 }
 
 .VerticalCardMenu img {
@@ -23,7 +23,7 @@
 }
 .VerticalCardMenu img:hover {
   cursor: pointer;
-  transform: scale(1.1);
+  transform: scale(1.01);
   transition: transform 0.5s;
   box-shadow: 0px 0px 10px rgba(248, 245, 245, 0.534);
 }
